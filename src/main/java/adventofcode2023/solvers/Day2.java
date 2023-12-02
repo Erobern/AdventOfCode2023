@@ -68,20 +68,6 @@ public class Day2 {
         return gameIdSum.toString();
     }
 
-    private static String getType(String splitLine) {
-        if (splitLine.contains("green")) {
-            return "green";
-        }
-        if (splitLine.contains("red")) {
-            return "red";
-        }
-        return "blue";
-    }
-
-    private static Integer getCount(String splitLine) {
-        return Integer.parseInt(Arrays.stream(splitLine.strip().split(" ")).findFirst().orElse("0"));
-    }
-
     public static String Day2_Puzzle2() {
         List<String> lines = FileLoaders.loadInputIntoStringList("Day2_1.txt");
 
@@ -118,11 +104,27 @@ public class Day2 {
             }
 
             sumOfPowers += redMin * greenMin * blueMin;
-            
+
         }
 
         return sumOfPowers.toString();
     }
+
+
+    private static String getType(String splitLine) {
+        if (splitLine.contains("green")) {
+            return "green";
+        }
+        if (splitLine.contains("red")) {
+            return "red";
+        }
+        return "blue";
+    }
+
+    private static Integer getCount(String splitLine) {
+        return Integer.parseInt(Arrays.stream(splitLine.strip().split(" ")).findFirst().orElse("0"));
+    }
+
 
     private record RevealedCubes(Integer count, String type) {
     }
