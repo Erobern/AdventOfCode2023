@@ -93,8 +93,7 @@ public class Day1 {
     private static void addNumber(List<Integer> returnList, String stringToEvaluate) {
         try {
             returnList.add(Integer.parseInt(stringToEvaluate.substring(0, 1)));
-        } catch (NumberFormatException e) {
-
+        } catch (NumberFormatException ignored) {
         }
     }
 }

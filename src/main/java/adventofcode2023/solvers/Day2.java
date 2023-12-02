@@ -9,9 +9,9 @@ public class Day2 {
 
     public static String Day2_Puzzle1() {
 
-        final Integer redMax = 12;
-        final Integer greenMax = 13;
-        final Integer blueMax = 14;
+        final int redMax = 12;
+        final int greenMax = 13;
+        final int blueMax = 14;
 
         List<String> lines = FileLoaders.loadInputIntoStringList("Day2_1.txt");
 
@@ -25,8 +25,8 @@ public class Day2 {
                         ).toList())
                 .toList();
 
-        Integer gameIdSum = 0;
-        Integer gameUnderEvaluation = 1;
+        int gameIdSum = 0;
+        int gameUnderEvaluation = 1;
 
         for (List<List<RevealedCubes>> revealedCubeSets : revealedCubesSets) {
             boolean isGamePossible = true;
@@ -37,13 +37,13 @@ public class Day2 {
                 Integer blueTotal = 0;
 
                 for (RevealedCubes individual : revealedCubes) {
-                    if (individual.type() == "green") {
+                    if (individual.type().equals("green")) {
                         greenTotal += individual.count();
                     }
-                    if (individual.type() == "red") {
+                    if (individual.type().equals("red")) {
                         redTotal += individual.count();
                     }
-                    if (individual.type() == "blue") {
+                    if (individual.type().equals("blue")) {
                         blueTotal += individual.count();
                     }
                 }
@@ -61,7 +61,7 @@ public class Day2 {
             gameUnderEvaluation++;
         }
 
-        return gameIdSum.toString();
+        return Integer.toString(gameIdSum);
     }
 
     public static String Day2_Puzzle2() {
@@ -77,23 +77,23 @@ public class Day2 {
                 ).toList())
                 .toList();
 
-        Integer sumOfPowers = 0;
+        int sumOfPowers = 0;
 
         for (List<List<RevealedCubes>> revealedCubeSets : revealedCubesSets) {
 
-            Integer redMin = 0;
-            Integer greenMin = 0;
-            Integer blueMin = 0;
+            int redMin = 0;
+            int greenMin = 0;
+            int blueMin = 0;
 
             for (List<RevealedCubes> revealedCubes : revealedCubeSets) {
                 for (RevealedCubes individual : revealedCubes) {
-                    if (individual.type() == "green" && greenMin < individual.count()) {
+                    if (individual.type().equals("green") && greenMin < individual.count()) {
                         greenMin = individual.count();
                     }
-                    if (individual.type() == "red" && redMin < individual.count()) {
+                    if (individual.type().equals("red") && redMin < individual.count()) {
                         redMin = individual.count();
                     }
-                    if (individual.type() == "blue" && blueMin < individual.count()) {
+                    if (individual.type().equals("blue") && blueMin < individual.count()) {
                         blueMin = individual.count();
                     }
                 }
@@ -103,7 +103,7 @@ public class Day2 {
 
         }
 
-        return sumOfPowers.toString();
+        return String.valueOf(sumOfPowers);
     }
 
 
