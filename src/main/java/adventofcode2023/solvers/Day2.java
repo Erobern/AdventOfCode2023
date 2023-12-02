@@ -18,11 +18,11 @@ public class Day2 {
         List<List<List<RevealedCubes>>> revealedCubesSets = lines
                 .stream()
                 .map(line -> Arrays.stream(line.split(":")).reduce((first, second) -> second).get())
-                .map(line -> Arrays.stream(line.split(";")).map(
-                        set -> Arrays.stream(set.split(",")).map(
-                                cubes -> new RevealedCubes(getCount(cubes), getType(cubes))
-                        ).toList()
-                ).toList())
+                .map(line -> Arrays.stream(line.split(";"))
+                        .map(set -> Arrays.stream(set.split(",")).map(
+                                        cubes -> new RevealedCubes(getCount(cubes), getType(cubes))
+                                ).toList()
+                        ).toList())
                 .toList();
 
         Integer gameIdSum = 0;
