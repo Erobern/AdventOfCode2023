@@ -1,7 +1,7 @@
 package adventofcode2023.solvers;
 
 import adventofcode2023.fileloaders.FileLoaders;
-import adventofcode2023.utils.Utils;
+import adventofcode2023.utils.IntUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,11 +14,11 @@ public class Day1 {
         Integer sum = lines
                 .stream()
                 .map(line -> (Arrays.stream(line.split(""))
-                        .filter(Utils::isInt).findFirst()
+                        .filter(IntUtils::isInt).findFirst()
                         .map(Integer::parseInt)
                         .orElse(0) * 10) +
                         (Arrays.stream(line.split(""))
-                                .filter(Utils::isInt).reduce((first, second) -> second)
+                                .filter(IntUtils::isInt).reduce((first, second) -> second)
                                 .map(Integer::parseInt)
                                 .orElse(0)))
                 .reduce(0, Integer::sum);
@@ -34,7 +34,7 @@ public class Day1 {
                 .map(line ->
                         (generateLineListOfNumbers(line)
                                 .stream()
-                                .findFirst().orElse(0)* 10) +
+                                .findFirst().orElse(0) * 10) +
                                 generateLineListOfNumbers(line)
                                         .stream()
                                         .reduce((first, second) -> second)
@@ -48,8 +48,7 @@ public class Day1 {
 
     private static List<Integer> generateLineListOfNumbers(String line) {
         List<Integer> returnList = new ArrayList<>();
-        for(int i = 0; i < line.length(); i++)
-        {
+        for (int i = 0; i < line.length(); i++) {
             String stringToEvaluate = line.substring(i);
             addNumber(returnList, stringToEvaluate);
             addWord(returnList, stringToEvaluate);
@@ -98,6 +97,4 @@ public class Day1 {
 
         }
     }
-
-
 }

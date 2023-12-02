@@ -1,17 +1,17 @@
 package adventofcode2023.fileloaders;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
 
-
 public class FileLoaders {
 
     public static List<String> loadInputIntoStringList(String input) {
-        File file = getFileFromResource("puzzleinputs/"+input);
+        File file = getFileFromResource("puzzleinputs/" + input);
 
         List<String> lines;
         try {
@@ -36,6 +36,5 @@ public class FileLoaders {
                 throw new RuntimeException(e);
             }
         }
-
     }
 }

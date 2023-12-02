@@ -2,7 +2,7 @@ import adventofcode2023.solvers.Day1;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class MainTest {
+public class PuzzleAnswerTests {
 
     @Test
     public void Day1_Puzzle1() {
