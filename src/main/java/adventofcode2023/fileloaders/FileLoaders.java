@@ -5,8 +5,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,7 +13,7 @@ public class FileLoaders {
     public static List<String> loadInputIntoStringList(String input) {
         File file = getFileFromResource("puzzleinputs/"+input);
 
-        List<String> lines = new ArrayList<>();
+        List<String> lines;
         try {
             lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
         } catch (IOException e) {
@@ -32,10 +30,6 @@ public class FileLoaders {
         if (resource == null) {
             throw new IllegalArgumentException("file not found! " + fileName);
         } else {
-
-            // failed if files have whitespaces or special characters
-            //return new File(resource.getFile());
-
             try {
                 return new File(resource.toURI());
             } catch (URISyntaxException e) {
