@@ -13,7 +13,6 @@ public class Day2 {
         final Integer greenMax = 13;
         final Integer blueMax = 14;
 
-
         List<String> lines = FileLoaders.loadInputIntoStringList("Day2_1.txt");
 
         List<List<List<RevealedCubes>>> revealedCubesSets = lines
@@ -54,9 +53,6 @@ public class Day2 {
                     break;
                 }
 
-                redTotal = 0;
-                greenTotal = 0;
-                blueTotal = 0;
             }
             if (isGamePossible) {
                 gameIdSum += gameUnderEvaluation;
