@@ -41,7 +41,7 @@ public class Day3 {
         for (NumberAndLocation numberAndLocation : numbersAndLocations) {
             partSum += addPartSum(lines, numberAndLocation);
         }
-        
+
         return String.valueOf(partSum);
     }
 
@@ -133,18 +133,27 @@ public class Day3 {
                 if (numberAndLocation.i() - 1 <= i && numberAndLocation.i() + 1 >= i &&
                         numberAndLocation.j() - 1 <= j && numberAndLocation.j() + 1 >= j) {
                     numberNeighbours++;
+                    if (numberNeighbours > 2) {
+                        return 0;
+                    }
                     ratioSum *= numberAndLocation.number();
                 }
             } else if (numberAndLocation.number() < 100) {
                 if (numberAndLocation.i() - 1 <= i && numberAndLocation.i() + 1 >= i &&
                         numberAndLocation.j() - 1 <= j && numberAndLocation.j() + 2 >= j) {
                     numberNeighbours++;
+                    if (numberNeighbours > 2) {
+                        return 0;
+                    }
                     ratioSum *= numberAndLocation.number();
                 }
             } else {
                 if (numberAndLocation.i() - 1 <= i && numberAndLocation.i() + 1 >= i &&
                         numberAndLocation.j() - 1 <= j && numberAndLocation.j() + 3 >= j) {
                     numberNeighbours++;
+                    if (numberNeighbours > 2) {
+                        return 0;
+                    }
                     ratioSum *= numberAndLocation.number();
                 }
             }

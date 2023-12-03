@@ -7,22 +7,28 @@ import java.util.List;
 
 public class Day2 {
 
-    public static String Day2_Puzzle1() {
+    final static int RED_MAX = 12;
+    final static int GREEN_MAX = 13;
+    final static int BLUE_MAX = 14;
 
-        final int redMax = 12;
-        final int greenMax = 13;
-        final int blueMax = 14;
+    public static String Day2_Puzzle1() {
 
         List<String> lines = FileLoaders.loadInputIntoStringList("Day2_1.txt");
 
         List<List<List<RevealedCubes>>> revealedCubesSets = lines
                 .stream()
-                .map(line -> Arrays.stream(line.split(":")).reduce((first, second) -> second).get())
-                .map(line -> Arrays.stream(line.split(";"))
-                        .map(set -> Arrays.stream(set.split(",")).map(
-                                        cubes -> new RevealedCubes(getCount(cubes), getType(cubes))
-                                ).toList()
-                        ).toList())
+                .map(line ->
+                        Arrays.stream(line.split(":"))
+                                .reduce((first, second) -> second)
+                                .get())
+                .map(line ->
+                        Arrays.stream(line.split(";"))
+                                .map(set ->
+                                        Arrays.stream(set.split(","))
+                                                .map(cubes ->
+                                                        new RevealedCubes(getCount(cubes), getType(cubes))
+                                                ).toList()
+                                ).toList())
                 .toList();
 
         int gameIdSum = 0;
@@ -48,7 +54,7 @@ public class Day2 {
                     }
                 }
 
-                if (redTotal > redMax || greenTotal > greenMax || blueTotal > blueMax) {
+                if (redTotal > RED_MAX || greenTotal > GREEN_MAX || blueTotal > BLUE_MAX) {
                     isGamePossible = false;
                     break;
                 }
@@ -98,14 +104,11 @@ public class Day2 {
                     }
                 }
             }
-
             sumOfPowers += redMin * greenMin * blueMin;
 
         }
-
         return String.valueOf(sumOfPowers);
     }
-
 
     private static String getType(String splitLine) {
         if (splitLine.contains("green")) {
@@ -118,9 +121,11 @@ public class Day2 {
     }
 
     private static Integer getCount(String splitLine) {
-        return Integer.parseInt(Arrays.stream(splitLine.strip().split(" ")).findFirst().orElse("0"));
+        return Integer.parseInt(Arrays.stream(splitLine.strip()
+                        .split(" "))
+                .findFirst()
+                .orElse("0"));
     }
-
 
     private record RevealedCubes(Integer count, String type) {
     }
