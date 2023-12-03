@@ -12,8 +12,7 @@ public class Day3 {
 
     public static String Day3_Puzzle1() {
         List<String> lines = FileLoaders.loadInputIntoStringList("Day3_1.txt");
-
-        int partSum = 0;
+        List<NumberAndLocation> numbersAndLocations = new ArrayList<>();
 
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);
@@ -29,40 +28,51 @@ public class Day3 {
                     } else {
                         numberLength = 1;
                     }
-                    // check all 10 boxes around
-                    boolean isPart = false;
-                    isPart = isPart || checkBox(i - 1, j - 1, lines);
-                    isPart = isPart || checkBox(i - 1, j, lines);
-                    isPart = isPart || checkBox(i - 1, j + 1, lines);
-                    isPart = isPart || checkBox(i + 1, j - 1, lines);
-                    isPart = isPart || checkBox(i + 1, j, lines);
-                    isPart = isPart || checkBox(i + 1, j + 1, lines);
 
-                    isPart = isPart || checkBox(i, j - 1, lines);
+                    numbersAndLocations.add(new NumberAndLocation(Integer.parseInt(line.substring(j, j + numberLength)), i, j));
 
-                    if (numberLength == 1) {
-                        isPart = isPart || checkBox(i, j + 1, lines);
-                    } else if (numberLength == 2) {
-                        isPart = isPart || checkBox(i - 1, j + 2, lines);
-                        isPart = isPart || checkBox(i + 1, j + 2, lines);
-                        isPart = isPart || checkBox(i, j + 2, lines);
-                    } else {
-                        isPart = isPart || checkBox(i - 1, j + 2, lines);
-                        isPart = isPart || checkBox(i + 1, j + 2, lines);
-                        isPart = isPart || checkBox(i - 1, j + 3, lines);
-                        isPart = isPart || checkBox(i + 1, j + 3, lines);
-                        isPart = isPart || checkBox(i, j + 3, lines);
-                    }
-
-                    if (isPart) {
-                        partSum += Integer.parseInt(line.substring(j, j + numberLength));
-                    }
                     j += numberLength;
                 }
             }
         }
 
+        int partSum = 0;
+
+        for (NumberAndLocation numberAndLocation : numbersAndLocations) {
+            partSum += addPartSum(lines, numberAndLocation);
+        }
+        
         return String.valueOf(partSum);
+    }
+
+    private static int addPartSum(List<String> lines, NumberAndLocation numberAndLocation) {
+        boolean isPart = false;
+        isPart = isPart || checkBox(numberAndLocation.i() - 1, numberAndLocation.j() - 1, lines);
+        isPart = isPart || checkBox(numberAndLocation.i() - 1, numberAndLocation.j(), lines);
+        isPart = isPart || checkBox(numberAndLocation.i() - 1, numberAndLocation.j() + 1, lines);
+        isPart = isPart || checkBox(numberAndLocation.i() + 1, numberAndLocation.j() - 1, lines);
+        isPart = isPart || checkBox(numberAndLocation.i() + 1, numberAndLocation.j(), lines);
+        isPart = isPart || checkBox(numberAndLocation.i() + 1, numberAndLocation.j() + 1, lines);
+        isPart = isPart || checkBox(numberAndLocation.i(), numberAndLocation.j() - 1, lines);
+
+        if (numberAndLocation.number() < 10) {
+            isPart = isPart || checkBox(numberAndLocation.i(), numberAndLocation.j() + 1, lines);
+        } else if (numberAndLocation.number() < 100) {
+            isPart = isPart || checkBox(numberAndLocation.i() - 1, numberAndLocation.j() + 2, lines);
+            isPart = isPart || checkBox(numberAndLocation.i() + 1, numberAndLocation.j() + 2, lines);
+            isPart = isPart || checkBox(numberAndLocation.i(), numberAndLocation.j() + 2, lines);
+        } else {
+            isPart = isPart || checkBox(numberAndLocation.i() - 1, numberAndLocation.j() + 2, lines);
+            isPart = isPart || checkBox(numberAndLocation.i() + 1, numberAndLocation.j() + 2, lines);
+            isPart = isPart || checkBox(numberAndLocation.i() - 1, numberAndLocation.j() + 3, lines);
+            isPart = isPart || checkBox(numberAndLocation.i() + 1, numberAndLocation.j() + 3, lines);
+            isPart = isPart || checkBox(numberAndLocation.i(), numberAndLocation.j() + 3, lines);
+        }
+
+        if (isPart) {
+            return numberAndLocation.number();
+        }
+        return 0;
     }
 
     private static boolean checkBox(int i, int j, List<String> lines) {
