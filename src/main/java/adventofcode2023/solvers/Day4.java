@@ -13,38 +13,12 @@ public class Day4 {
 
         AtomicInteger totalPoints = new AtomicInteger();
 
-        lines
-                .stream()
-                .map(line ->
-                        Arrays.stream(line.split(":"))
-                                .reduce((first, second) -> second)
-                                .get())
-                .forEach(line -> {
-                    List<Integer> winningNumbers =
-                            Arrays.stream(Arrays.stream(line.split("x")).findFirst().get()
-                                            .split(" "))
-                                    .filter(s -> !s.isBlank() && !s.isEmpty())
-                                    .map(Integer::parseInt)
-                                    .toList();
+        List<ScratchTicket> scratchTickets = getScratchTickets(lines);
 
-                    List<Integer> numbersWeHave =
-                            Arrays.stream(Arrays.stream(line.split("x")).reduce((first, second) -> second).get()
-                                            .split(" "))
-                                    .filter(s -> !s.isBlank() && !s.isEmpty())
-                                    .map(Integer::parseInt)
-                                    .toList();
-
-                    AtomicInteger totalWins = new AtomicInteger();
-
-                    winningNumbers
-                            .forEach(winningNumber -> {
-                                if (numbersWeHave.contains(winningNumber)) {
-                                    totalWins.getAndIncrement();
-                                }
-                            });
-
-                    if (totalWins.get() > 0) {
-                        totalPoints.addAndGet((int) Math.pow(2, (totalWins.get() - 1)));
+        scratchTickets.stream()
+                .forEach(scratchTicket -> {
+                    if (scratchTicket.totalWins() > 0) {
+                        totalPoints.addAndGet((int) Math.pow(2, (scratchTicket.totalWins() - 1)));
                     }
                 });
 
@@ -54,6 +28,19 @@ public class Day4 {
     public static String Day4_Puzzle2() {
         List<String> lines = FileLoaders.loadInputIntoStringList("Day4_1.txt");
 
+        List<ScratchTicket> scratchTickets = getScratchTickets(lines);
+
+        for (int i = 0; i < scratchTickets.size(); i++) {
+            ScratchTicket scratchTicket = scratchTickets.get(i);
+            for (int j = scratchTicket.cardIndex() + 1; j <= scratchTicket.totalWins() + scratchTicket.cardIndex(); j++) {
+                scratchTickets.add(scratchTickets.get(j));
+            }
+        }
+
+        return String.valueOf(scratchTickets.size());
+    }
+
+    private static List<ScratchTicket> getScratchTickets(List<String> lines) {
         List<ScratchTicket> scratchTickets = new ArrayList<>();
 
         lines
@@ -95,15 +82,7 @@ public class Day4 {
 
                     scratchTickets.add(new ScratchTicket(cardIndex, winningNumbers, numbersWeHave, totalWins.get()));
                 });
-
-        for (int i = 0; i < scratchTickets.size(); i++) {
-            ScratchTicket scratchTicket = scratchTickets.get(i);
-            for (int j = scratchTicket.cardIndex() + 1; j <= scratchTicket.totalWins() + scratchTicket.cardIndex(); j++) {
-                scratchTickets.add(scratchTickets.get(j));
-            }
-        }
-
-        return String.valueOf(scratchTickets.size());
+        return scratchTickets;
     }
 
     private record ScratchTicket(Integer cardIndex, List<Integer> winningNumbers, List<Integer> playNumbers,
