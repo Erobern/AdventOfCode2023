@@ -43,38 +43,9 @@ public class Day4 {
                                 }
                             });
 
-                    if (totalWins.get() == 1) {
-                        totalPoints.addAndGet(1);
+                    if (totalWins.get() > 0) {
+                        totalPoints.addAndGet((int) Math.pow(2, (totalWins.get() - 1)));
                     }
-                    if (totalWins.get() == 2) {
-                        totalPoints.addAndGet(2);
-                    }
-                    if (totalWins.get() == 3) {
-                        totalPoints.addAndGet(4);
-                    }
-                    if (totalWins.get() == 4) {
-                        totalPoints.addAndGet(8);
-                    }
-                    if (totalWins.get() == 5) {
-                        totalPoints.addAndGet(16);
-                    }
-                    if (totalWins.get() == 6) {
-                        totalPoints.addAndGet(32);
-                    }
-                    if (totalWins.get() == 7) {
-                        totalPoints.addAndGet(64);
-                    }
-                    if (totalWins.get() == 8) {
-                        totalPoints.addAndGet(128);
-                    }
-                    if (totalWins.get() == 9) {
-                        totalPoints.addAndGet(256);
-                    }
-                    if (totalWins.get() == 10) {
-                        totalPoints.addAndGet(512);
-                    }
-
-
                 });
 
         return totalPoints.toString();
