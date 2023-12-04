@@ -2,6 +2,7 @@ package adventofcode2023.solvers;
 
 import adventofcode2023.fileloaders.FileLoaders;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -82,50 +83,60 @@ public class Day4 {
     public static String Day4_Puzzle2() {
         List<String> lines = FileLoaders.loadInputIntoStringList("Day4_1.txt");
 
-        for (int i = 0; i < lines.size(); i++) {
-            Integer cardIndex = Arrays.stream(Arrays.stream(lines.get(i).split(":"))
-                            .findFirst()
-                            .get()
-                            .split(" ")).reduce((first, second) -> second)
-                    .map(Integer::parseInt)
-                    .get() - 1;
+        List<ScratchTicket> scratchTickets = new ArrayList<>();
 
-            String line = Arrays.stream(lines.get(i).split(":"))
-                    .reduce((first, second) -> second)
-                    .get();
-
-            List<Integer> winningNumbers =
-                    Arrays.stream(Arrays.stream(line.split("x")).findFirst().get()
-                                    .split(" "))
-                            .filter(s -> !s.isBlank() && !s.isEmpty())
+        lines
+                .stream()
+                .forEach(line -> {
+                    Integer cardIndex = Arrays.stream(Arrays.stream(line.split(":"))
+                                    .findFirst()
+                                    .get()
+                                    .split(" ")).reduce((first, second) -> second)
                             .map(Integer::parseInt)
-                            .toList();
+                            .get() - 1;
 
-            List<Integer> numbersWeHave =
-                    Arrays.stream(Arrays.stream(line.split("x")).reduce((first, second) -> second).get()
-                                    .split(" "))
-                            .filter(s -> !s.isBlank() && !s.isEmpty())
-                            .map(Integer::parseInt)
-                            .toList();
+                    String gameArea = Arrays.stream(line.split(":"))
+                            .reduce((first, second) -> second)
+                            .get();
 
-            AtomicInteger totalWins = new AtomicInteger();
+                    List<Integer> winningNumbers =
+                            Arrays.stream(Arrays.stream(gameArea.split("x")).findFirst().get()
+                                            .split(" "))
+                                    .filter(s -> !s.isBlank() && !s.isEmpty())
+                                    .map(Integer::parseInt)
+                                    .toList();
 
-            winningNumbers
-                    .forEach(winningNumber -> {
-                        if (numbersWeHave.contains(winningNumber)) {
-                            totalWins.getAndIncrement();
-                        }
-                    });
+                    List<Integer> numbersWeHave =
+                            Arrays.stream(Arrays.stream(gameArea.split("x")).reduce((first, second) -> second).get()
+                                            .split(" "))
+                                    .filter(s -> !s.isBlank() && !s.isEmpty())
+                                    .map(Integer::parseInt)
+                                    .toList();
 
-            for (int j = cardIndex + 1; j <= totalWins.get() + cardIndex; j++) {
-                lines.add(lines.get(j));
+                    AtomicInteger totalWins = new AtomicInteger();
+
+                    winningNumbers
+                            .forEach(winningNumber -> {
+                                if (numbersWeHave.contains(winningNumber)) {
+                                    totalWins.getAndIncrement();
+                                }
+                            });
+
+                    scratchTickets.add(new ScratchTicket(cardIndex, winningNumbers, numbersWeHave, totalWins.get()));
+                });
+
+        for (int i = 0; i < scratchTickets.size(); i++) {
+            ScratchTicket scratchTicket = scratchTickets.get(i);
+            for (int j = scratchTicket.cardIndex() + 1; j <= scratchTicket.totalWins() + scratchTicket.cardIndex(); j++) {
+                scratchTickets.add(scratchTickets.get(j));
             }
         }
 
-        return String.valueOf(lines.size());
+        return String.valueOf(scratchTickets.size());
     }
 
-    private record ScratchTicket(Integer cardNumber, List<Integer> winningNumbers, List<Integer> playNumbers) {
+    private record ScratchTicket(Integer cardIndex, List<Integer> winningNumbers, List<Integer> playNumbers,
+                                 Integer totalWins) {
     }
 
 }
