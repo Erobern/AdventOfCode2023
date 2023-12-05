@@ -134,7 +134,10 @@ public class Day5 {
             else if (remainingInputStart.compareTo(currentValidMap.input()) <= 0 &&
                     remainingInputStart.add(remainingOffset).compareTo(currentValidMap.input().add(currentValidMap.range())) >= 0) {
                 BigInteger margin = currentValidMap.input().subtract(remainingInputStart);
-                if (margin.compareTo(BigInteger.ZERO) == 0) {
+                BigInteger endMargin = currentValidMap.input().add(currentValidMap.range()).subtract(
+                        remainingInputStart.add(remainingOffset));
+                if (margin.compareTo(BigInteger.ZERO) == 0 &&
+                        endMargin.compareTo(BigInteger.ZERO) == 0) {
                     outputMaps.add(new InputMap(currentValidMap.output(), currentValidMap.range()));
                     return outputMaps;
                 } else {

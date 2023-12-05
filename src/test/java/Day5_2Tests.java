@@ -96,7 +96,8 @@ public class Day5_2Tests {
                         new Day5.TranslationMap(new BigInteger("50"), new BigInteger("0"), new BigInteger("5")))
         );
 
-        assertInputMap(results, List.of(new Day5.InputMap(new BigInteger("0"), new BigInteger("10"))));
+        assertInputMap(results, List.of(new Day5.InputMap(new BigInteger("0"), new BigInteger("10")),
+                new Day5.InputMap(new BigInteger("13"), new BigInteger("5"))));
     }
 
     @Test
@@ -107,7 +108,8 @@ public class Day5_2Tests {
                         new Day5.TranslationMap(new BigInteger("50"), new BigInteger("0"), new BigInteger("5")))
         );
 
-        assertInputMap(results, List.of(new Day5.InputMap(new BigInteger("0"), new BigInteger("11"))));
+        assertInputMap(results, List.of(new Day5.InputMap(new BigInteger("0"), new BigInteger("11")),
+                new Day5.InputMap(new BigInteger("22"), new BigInteger("5"))));
     }
 
     @Test
