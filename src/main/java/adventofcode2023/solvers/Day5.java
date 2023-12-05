@@ -126,7 +126,6 @@ public class Day5 {
                     remainingInputStart.add(remainingOffset).compareTo(currentValidMap.input().add(currentValidMap.range())) < 0) {
                 BigInteger margin = currentValidMap.input().subtract(remainingInputStart);
                 outputMaps.add(new InputMap(remainingInputStart, margin));
-                remainingInputStart = remainingInputStart.add(margin);
                 remainingOffset = remainingOffset.subtract(margin);
                 outputMaps.add(new InputMap(currentValidMap.output(), remainingOffset));
                 return outputMaps;
@@ -135,19 +134,15 @@ public class Day5 {
             else if (remainingInputStart.compareTo(currentValidMap.input()) <= 0 &&
                     remainingInputStart.add(remainingOffset).compareTo(currentValidMap.input().add(currentValidMap.range())) >= 0) {
                 BigInteger margin = currentValidMap.input().subtract(remainingInputStart);
-                BigInteger endMargin = currentValidMap.input().add(currentValidMap.range()).subtract(
-                        remainingInputStart.add(remainingOffset));
-                if (margin.compareTo(BigInteger.ZERO) == 0 && endMargin.compareTo(BigInteger.ZERO) == 0) {
+                if (margin.compareTo(BigInteger.ZERO) == 0) {
                     outputMaps.add(new InputMap(currentValidMap.output(), currentValidMap.range()));
                     return outputMaps;
                 } else {
-
                     if (margin.compareTo(BigInteger.ZERO) > 0) {
                         outputMaps.add(new InputMap(remainingInputStart, margin));
                         remainingInputStart = remainingInputStart.add(currentValidMap.range());
                         remainingOffset = remainingOffset.subtract(currentValidMap.range());
                     }
-
                     outputMaps.add(new InputMap(currentValidMap.output(), currentValidMap.range()));
                     remainingInputStart = remainingInputStart.add(currentValidMap.range());
                     remainingOffset = remainingOffset.subtract(currentValidMap.range());
