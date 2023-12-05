@@ -18,5 +18,8 @@ public class Main {
 
         System.out.println("Day5/Puzzle1: " + Day5.Day5_Puzzle1());
         System.out.println("Day5/Puzzle2: " + Day5.Day5_Puzzle2());
+
+        System.out.println("Day6/Puzzle1: " + Day6.Day6_Puzzle1());
+        System.out.println("Day6/Puzzle2: " + Day6.Day6_Puzzle2());
     }
 }
