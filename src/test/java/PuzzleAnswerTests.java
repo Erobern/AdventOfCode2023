@@ -18,7 +18,10 @@ public class PuzzleAnswerTests {
         Assertions.assertEquals("23750", Day4.Day4_Puzzle1(), "Day 4, Puzzle 1");
         Assertions.assertEquals("13261850", Day4.Day4_Puzzle2(), "Day 4, Puzzle 2");
 
-        Assertions.assertEquals("51580674", Day5.Day5_Puzzle1(), "Day 5, Puzzle 2");
+        Assertions.assertEquals("51580674", Day5.Day5_Puzzle1(), "Day 5, Puzzle 1");
         Assertions.assertEquals("99751240", Day5.Day5_Puzzle2(), "Day 5, Puzzle 2");
+
+        Assertions.assertEquals("211904", Day6.Day6_Puzzle1(), "Day 6, Puzzle 1");
+        Assertions.assertEquals("43364472", Day6.Day6_Puzzle2(), "Day 6, Puzzle 2");
     }
 }
