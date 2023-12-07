@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Day4 {
-    public static String Day4_Puzzle1() {
-        List<String> lines = FileLoaders.loadInputIntoStringList("Day4_1.txt");
+    public static String Puzzle1(String input) {
+        List<String> lines = FileLoaders.loadInputIntoStringList(input);
 
         AtomicInteger totalPoints = new AtomicInteger();
 
@@ -25,8 +25,8 @@ public class Day4 {
         return totalPoints.toString();
     }
 
-    public static String Day4_Puzzle2() {
-        List<String> lines = FileLoaders.loadInputIntoStringList("Day4_1.txt");
+    public static String Puzzle2(String input) {
+        List<String> lines = FileLoaders.loadInputIntoStringList(input);
 
         List<ScratchTicket> scratchTickets = getScratchTickets(lines);
 

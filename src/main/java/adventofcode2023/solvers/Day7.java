@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 
 public class Day7 {
 
-    public static String Day7_Puzzle1() {
-        List<String> lines = FileLoaders.loadInputIntoStringList("Day7_1.txt");
+    public static String Puzzle1(String input) {
+        List<String> lines = FileLoaders.loadInputIntoStringList(input);
 
         List<Hand> hands = lines.stream().map(line -> {
             List<String> lineParts = Arrays.stream(line.split(" ")).toList();
@@ -225,8 +225,8 @@ public class Day7 {
         }
     }
 
-    public static String Day7_Puzzle2() {
-        List<String> lines = FileLoaders.loadInputIntoStringList("Day7_1.txt");
+    public static String Puzzle2(String input) {
+        List<String> lines = FileLoaders.loadInputIntoStringList(input);
 
         List<Hand> hands = lines.stream().map(line -> {
             List<String> lineParts = Arrays.stream(line.split(" ")).toList();

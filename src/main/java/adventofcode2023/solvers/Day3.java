@@ -10,8 +10,8 @@ public class Day3 {
 
     static final int MAX_LINE_LENGTH = 140;
 
-    public static String Day3_Puzzle1() {
-        List<String> lines = FileLoaders.loadInputIntoStringList("Day3_1.txt");
+    public static String Day3_Puzzle1(String input) {
+        List<String> lines = FileLoaders.loadInputIntoStringList(input);
         List<NumberAndLocation> numbersAndLocations = new ArrayList<>();
 
         for (int i = 0; i < lines.size(); i++) {
@@ -83,8 +83,8 @@ public class Day3 {
         }
     }
 
-    public static String Day3_Puzzle2() {
-        List<String> lines = FileLoaders.loadInputIntoStringList("Day3_1.txt");
+    public static String Day3_Puzzle2(String input) {
+        List<String> lines = FileLoaders.loadInputIntoStringList(input);
         List<NumberAndLocation> numbersAndLocations = new ArrayList<>();
 
         for (int i = 0; i < lines.size(); i++) {

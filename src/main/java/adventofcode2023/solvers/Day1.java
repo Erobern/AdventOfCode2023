@@ -8,8 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Day1 {
-    public static String Day1_Puzzle1() {
-        List<String> lines = FileLoaders.loadInputIntoStringList("Day1_1.txt");
+    public static String Puzzle1(String input) {
+        List<String> lines = FileLoaders.loadInputIntoStringList(input);
 
         Integer sum = lines
                 .stream()
@@ -26,8 +26,8 @@ public class Day1 {
         return sum.toString();
     }
 
-    public static String Day1_Puzzle2() {
-        List<String> lines = FileLoaders.loadInputIntoStringList("Day1_1.txt");
+    public static String Puzzle2(String input) {
+        List<String> lines = FileLoaders.loadInputIntoStringList(input);
 
         Integer sum = lines
                 .stream()

@@ -8,7 +8,7 @@ public class Day6 {
 //    Time:        56     71     79     99
 //    Distance:   334   1135   1350   2430
 
-    public static String Day6_Puzzle1() {
+    public static String Puzzle1() {
         List<Race> races = List.of(
                 new Race(56, 334), new Race(71, 1135),
                 new Race(79, 1350), new Race(99, 2430)
@@ -28,7 +28,7 @@ public class Day6 {
 
     }
 
-    public static String Day6_Puzzle2() {
+    public static String Puzzle2() {
         Part2Race race =
                 new Part2Race(new BigInteger("56717999"), new BigInteger("334113513502430"));
 

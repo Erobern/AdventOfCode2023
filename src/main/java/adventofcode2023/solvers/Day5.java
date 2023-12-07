@@ -7,18 +7,25 @@ import java.util.*;
 
 public class Day5 {
 
-    public static String Day5_Puzzle1() {
-        List<String> seedsInput = FileLoaders.loadInputIntoStringList("Day5_1_seeds.txt");
+    public static String Puzzle1(String seedsInputInput,
+                                 String seedSoilMapInput,
+                                 String soilFertilizerMapInput,
+                                 String fertilizerWaterMapInput,
+                                 String waterLightMapInput,
+                                 String lightTemperatureMapInput,
+                                 String temperatureHumidityMapInput,
+                                 String humidityLocationMapInput) {
+        List<String> seedsInput = FileLoaders.loadInputIntoStringList(seedsInputInput);
 
         List<BigInteger> seeds = Arrays.stream(seedsInput.get(0).split(" ")).map(BigInteger::new).toList();
 
-        List<TranslationMap> seedSoilMaps = getTranslationMaps("Day5_1_seed-soil-map.txt");
-        List<TranslationMap> soilFertilizerMaps = getTranslationMaps("Day5_1_soil-fertilizer-map.txt");
-        List<TranslationMap> fertilizerWaterMaps = getTranslationMaps("Day5_1_fertilizer-water-map.txt");
-        List<TranslationMap> waterLightMaps = getTranslationMaps("Day5_1_water-light-map.txt");
-        List<TranslationMap> lightTemperatureMaps = getTranslationMaps("Day5_1_light-temperature-map.txt");
-        List<TranslationMap> temperatureHumidityMaps = getTranslationMaps("Day5_1_temperature-humidity-map.txt");
-        List<TranslationMap> humidityLocationMaps = getTranslationMaps("Day5_1_humidity-location-map.txt");
+        List<TranslationMap> seedSoilMaps = getTranslationMaps(seedSoilMapInput);
+        List<TranslationMap> soilFertilizerMaps = getTranslationMaps(soilFertilizerMapInput);
+        List<TranslationMap> fertilizerWaterMaps = getTranslationMaps(fertilizerWaterMapInput);
+        List<TranslationMap> waterLightMaps = getTranslationMaps(waterLightMapInput);
+        List<TranslationMap> lightTemperatureMaps = getTranslationMaps(lightTemperatureMapInput);
+        List<TranslationMap> temperatureHumidityMaps = getTranslationMaps(temperatureHumidityMapInput);
+        List<TranslationMap> humidityLocationMaps = getTranslationMaps(humidityLocationMapInput);
 
         return String.valueOf(seeds.stream()
                 .map(seed -> translateToNextMap(seed, seedSoilMaps))
@@ -55,21 +62,28 @@ public class Day5 {
         }).toList();
     }
 
-    public static String Day5_Puzzle2() {
-        List<String> seedsInput = FileLoaders.loadInputIntoStringList("Day5_2_seeds.txt");
+    public static String Puzzle2(String seedsInputInput,
+                                 String seedSoilMapInput,
+                                 String soilFertilizerMapInput,
+                                 String fertilizerWaterMapInput,
+                                 String waterLightMapInput,
+                                 String lightTemperatureMapInput,
+                                 String temperatureHumidityMapInput,
+                                 String humidityLocationMapInput) {
+        List<String> seedsInput = FileLoaders.loadInputIntoStringList(seedsInputInput);
 
         List<InputMap> seedMaps = seedsInput.stream().map(line -> {
             List<BigInteger> parsedLine = Arrays.stream(line.split(" ")).map(BigInteger::new).toList();
             return new InputMap(parsedLine.get(0), parsedLine.get(1));
         }).toList();
 
-        List<TranslationMap> seedSoilMaps = getTranslationMaps("Day5_1_seed-soil-map.txt");
-        List<TranslationMap> soilFertilizerMaps = getTranslationMaps("Day5_1_soil-fertilizer-map.txt");
-        List<TranslationMap> fertilizerWaterMaps = getTranslationMaps("Day5_1_fertilizer-water-map.txt");
-        List<TranslationMap> waterLightMaps = getTranslationMaps("Day5_1_water-light-map.txt");
-        List<TranslationMap> lightTemperatureMaps = getTranslationMaps("Day5_1_light-temperature-map.txt");
-        List<TranslationMap> temperatureHumidityMaps = getTranslationMaps("Day5_1_temperature-humidity-map.txt");
-        List<TranslationMap> humidityLocationMaps = getTranslationMaps("Day5_1_humidity-location-map.txt");
+        List<TranslationMap> seedSoilMaps = getTranslationMaps(seedSoilMapInput);
+        List<TranslationMap> soilFertilizerMaps = getTranslationMaps(soilFertilizerMapInput);
+        List<TranslationMap> fertilizerWaterMaps = getTranslationMaps(fertilizerWaterMapInput);
+        List<TranslationMap> waterLightMaps = getTranslationMaps(waterLightMapInput);
+        List<TranslationMap> lightTemperatureMaps = getTranslationMaps(lightTemperatureMapInput);
+        List<TranslationMap> temperatureHumidityMaps = getTranslationMaps(temperatureHumidityMapInput);
+        List<TranslationMap> humidityLocationMaps = getTranslationMaps(humidityLocationMapInput);
 
         return String.valueOf(seedMaps.stream()
                 .map(seedMap -> translateMapToNextMaps(seedMap, seedSoilMaps)).flatMap(List::stream)

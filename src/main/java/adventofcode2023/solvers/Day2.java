@@ -11,9 +11,9 @@ public class Day2 {
     final static int GREEN_MAX = 13;
     final static int BLUE_MAX = 14;
 
-    public static String Day2_Puzzle1() {
+    public static String Puzzle1(String input) {
 
-        List<String> lines = FileLoaders.loadInputIntoStringList("Day2_1.txt");
+        List<String> lines = FileLoaders.loadInputIntoStringList(input);
 
         List<List<List<RevealedCubes>>> revealedCubesSets = lines
                 .stream()
@@ -70,8 +70,8 @@ public class Day2 {
         return Integer.toString(gameIdSum);
     }
 
-    public static String Day2_Puzzle2() {
-        List<String> lines = FileLoaders.loadInputIntoStringList("Day2_1.txt");
+    public static String Puzzle2(String input) {
+        List<String> lines = FileLoaders.loadInputIntoStringList(input);
 
         List<List<List<RevealedCubes>>> revealedCubesSets = lines
                 .stream()
