@@ -93,60 +93,178 @@ public class Day7 {
                 hand.bid());
     }
 
-    private static ParsedHand calculateRankP2(Hand hand) {
+    private static ParsedHandP2 calculateRankP2(Hand hand) {
 
         List<String> cards = Arrays.stream(hand.hand().split("")).toList();
         Map<String, Long> countOfCards = cards.stream()
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
-        List<Card> enumeratedCards = cards.stream().map(Card::get).toList();
+        List<CardP2> enumeratedCards = cards.stream().map(CardP2::get).toList();
 
         if (cards.stream().distinct().count() == 1) {
-            return new ParsedHand(Rank.FIVE_OF_KIND,
+            return new ParsedHandP2(Rank.FIVE_OF_KIND,
                     enumeratedCards,
                     hand.bid());
         }
 
         if (cards.stream().distinct().count() == 2) {
-            if (countOfCards.containsValue(4L)) {
-                return new ParsedHand(Rank.FOUR_OF_KIND,
+            if (enumeratedCards.contains(CardP2.JOKER)) {
+                return new ParsedHandP2(Rank.FIVE_OF_KIND,
                         enumeratedCards,
                         hand.bid());
             }
 
-            return new ParsedHand(Rank.FULL_HOUSE,
+            if (countOfCards.containsValue(4L)) {
+                return new ParsedHandP2(Rank.FOUR_OF_KIND,
+                        enumeratedCards,
+                        hand.bid());
+            }
+
+            return new ParsedHandP2(Rank.FULL_HOUSE,
                     enumeratedCards,
                     hand.bid());
         }
 
         if (cards.stream().distinct().count() == 3) {
-            if (countOfCards.containsValue(3L)) {
-                return new ParsedHand(Rank.THREE_OF_KIND,
+            if (countOfCards.containsValue(3L) && (
+                    enumeratedCards.stream().filter(c -> c.equals(CardP2.JOKER)).count() == 1 ||
+                            enumeratedCards.stream().filter(c -> c.equals(CardP2.JOKER)).count() == 3)) {
+                return new ParsedHandP2(Rank.FOUR_OF_KIND,
                         enumeratedCards,
                         hand.bid());
             }
 
-            return new ParsedHand(Rank.TWO_PAIR,
+            if (countOfCards.containsValue(3L)) {
+                return new ParsedHandP2(Rank.THREE_OF_KIND,
+                        enumeratedCards,
+                        hand.bid());
+            }
+
+            if (enumeratedCards.stream().filter(c -> c.equals(CardP2.JOKER)).count() == 2) {
+                return new ParsedHandP2(Rank.FOUR_OF_KIND,
+                        enumeratedCards,
+                        hand.bid());
+            }
+
+            if (enumeratedCards.stream().filter(c -> c.equals(CardP2.JOKER)).count() == 1) {
+                return new ParsedHandP2(Rank.FULL_HOUSE,
+                        enumeratedCards,
+                        hand.bid());
+            }
+
+            return new ParsedHandP2(Rank.TWO_PAIR,
                     enumeratedCards,
                     hand.bid());
         }
 
         if (cards.stream().distinct().count() == 4) {
-            return new ParsedHand(Rank.ONE_PAIR,
+            if (enumeratedCards.stream().filter(c -> c.equals(CardP2.JOKER)).count() == 1 ||
+                    enumeratedCards.stream().filter(c -> c.equals(CardP2.JOKER)).count() == 2) {
+                return new ParsedHandP2(Rank.THREE_OF_KIND,
+                        enumeratedCards,
+                        hand.bid());
+            }
+
+            return new ParsedHandP2(Rank.ONE_PAIR,
                     enumeratedCards,
                     hand.bid());
         }
 
-        return new ParsedHand(Rank.HIGH_CARD,
+        if (enumeratedCards.stream().filter(c -> c.equals(CardP2.JOKER)).count() == 1) {
+            return new ParsedHandP2(Rank.ONE_PAIR,
+                    enumeratedCards,
+                    hand.bid());
+        }
+
+        return new ParsedHandP2(Rank.HIGH_CARD,
                 enumeratedCards,
                 hand.bid());
     }
 
-    public static String Day7_Puzzle2() {
-        List<String> lines = FileLoaders.loadInputIntoStringList("Day5_2_seeds.txt");
-        return null;
+    private static int compare(ParsedHand o1, ParsedHand o2) {
+        switch (Integer.compare(o1.orderedCards.get(0).getOrder(), o2.orderedCards.get(0).getOrder())) {
+            case -1:
+                return -1;
+            case 1:
+                return 1;
+            case 0: {
+                switch (Integer.compare(o1.orderedCards.get(1).getOrder(), o2.orderedCards.get(1).getOrder())) {
+                    case -1:
+                        return -1;
+                    case 1:
+                        return 1;
+                    case 0: {
+                        switch (Integer.compare(o1.orderedCards.get(2).getOrder(), o2.orderedCards.get(2).getOrder())) {
+                            case -1:
+                                return -1;
+                            case 1:
+                                return 1;
+                            case 0: {
+                                switch (Integer.compare(o1.orderedCards.get(3).getOrder(), o2.orderedCards.get(3).getOrder())) {
+                                    case -1:
+                                        return -1;
+                                    case 1:
+                                        return 1;
+                                    case 0: {
+                                        switch (Integer.compare(o1.orderedCards.get(4).getOrder(), o2.orderedCards.get(4).getOrder())) {
+                                            case -1:
+                                                return -1;
+                                            case 1:
+                                                return 1;
+                                            case 0:
+                                                return 0;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            default:
+                return 0;
+        }
     }
 
-    private static int compare(ParsedHand o1, ParsedHand o2) {
+    public static String Day7_Puzzle2() {
+        List<String> lines = FileLoaders.loadInputIntoStringList("Day7_1.txt");
+
+        List<Hand> hands = lines.stream().map(line -> {
+            List<String> lineParts = Arrays.stream(line.split(" ")).toList();
+            return new Hand(lineParts.get(0), Integer.parseInt(lineParts.get(1)));
+        }).toList();
+
+        List<ParsedHandP2> parsedHands = hands.stream().map(Day7::calculateRankP2).toList();
+
+        List<ParsedHandP2> jokerHands = parsedHands.stream().filter(hand -> hand.orderedCards.contains(CardP2.JOKER)).toList();
+
+        List<ParsedHandP2> fiveOfKinds = parsedHands.stream().filter(hand -> hand.rank.equals(Rank.FIVE_OF_KIND)).sorted(Day7::compareP2).toList();
+        List<ParsedHandP2> fourOfKinds = parsedHands.stream().filter(hand -> hand.rank.equals(Rank.FOUR_OF_KIND)).sorted(Day7::compareP2).toList();
+        List<ParsedHandP2> fullHouses = parsedHands.stream().filter(hand -> hand.rank.equals(Rank.FULL_HOUSE)).sorted(Day7::compareP2).toList();
+        List<ParsedHandP2> threeOfKinds = parsedHands.stream().filter(hand -> hand.rank.equals(Rank.THREE_OF_KIND)).sorted(Day7::compareP2).toList();
+        List<ParsedHandP2> twoPairs = parsedHands.stream().filter(hand -> hand.rank.equals(Rank.TWO_PAIR)).sorted(Day7::compareP2).toList();
+        List<ParsedHandP2> onePairs = parsedHands.stream().filter(hand -> hand.rank.equals(Rank.ONE_PAIR)).sorted(Day7::compareP2).toList();
+        List<ParsedHandP2> highCards = parsedHands.stream().filter(hand -> hand.rank.equals(Rank.HIGH_CARD)).sorted(Day7::compareP2).toList();
+
+        List<ParsedHandP2> sortedHands = new ArrayList<>();
+        sortedHands.addAll(fiveOfKinds);
+        sortedHands.addAll(fourOfKinds);
+        sortedHands.addAll(fullHouses);
+        sortedHands.addAll(threeOfKinds);
+        sortedHands.addAll(twoPairs);
+        sortedHands.addAll(onePairs);
+        sortedHands.addAll(highCards);
+
+        Collections.reverse(sortedHands);
+
+        Integer sum = 0;
+        for (int i = 0; i < 1000; i++) {
+            sum += sortedHands.get(i).bid() * (i + 1);
+        }
+
+        return String.valueOf(sum);
+    }
+
+    private static int compareP2(ParsedHandP2 o1, ParsedHandP2 o2) {
         switch (Integer.compare(o1.orderedCards.get(0).getOrder(), o2.orderedCards.get(0).getOrder())) {
             case -1:
                 return -1;
@@ -230,16 +348,16 @@ public class Day7 {
         ACE("A", 0),
         KING("K", 1),
         QUEEN("Q", 2),
-        JACK("T", 3),
-        TEN("9", 4),
-        NINE("8", 5),
-        EIGHT("7", 6),
-        SEVEN("6", 7),
-        SIX("5", 8),
-        FIVE("4", 9),
-        FOUR("3", 10),
-        THREE("2", 11),
-        TWO("J", 12);
+        TEN("T", 3),
+        NINE("9", 4),
+        EIGHT("8", 5),
+        SEVEN("7", 6),
+        SIX("6", 7),
+        FIVE("5", 8),
+        FOUR("4", 9),
+        THREE("3", 10),
+        TWO("2", 11),
+        JOKER("J", 12);
 
         private final Integer cardOrder;
         private final String card;

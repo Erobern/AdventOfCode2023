@@ -23,5 +23,8 @@ public class PuzzleAnswerTests {
 
         Assertions.assertEquals("211904", Day6.Day6_Puzzle1(), "Day 6, Puzzle 1");
         Assertions.assertEquals("43364472", Day6.Day6_Puzzle2(), "Day 6, Puzzle 2");
+
+        Assertions.assertEquals("250347426", Day7.Day7_Puzzle1(), "Day 7, Puzzle 1");
+        Assertions.assertEquals("251224870", Day7.Day7_Puzzle2(), "Day 7, Puzzle 2");
     }
 }
