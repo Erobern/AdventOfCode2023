@@ -235,8 +235,6 @@ public class Day7 {
 
         List<ParsedHandP2> parsedHands = hands.stream().map(Day7::calculateRankP2).toList();
 
-        List<ParsedHandP2> jokerHands = parsedHands.stream().filter(hand -> hand.orderedCards.contains(CardP2.JOKER)).toList();
-
         List<ParsedHandP2> fiveOfKinds = parsedHands.stream().filter(hand -> hand.rank.equals(Rank.FIVE_OF_KIND)).sorted(Day7::compareP2).toList();
         List<ParsedHandP2> fourOfKinds = parsedHands.stream().filter(hand -> hand.rank.equals(Rank.FOUR_OF_KIND)).sorted(Day7::compareP2).toList();
         List<ParsedHandP2> fullHouses = parsedHands.stream().filter(hand -> hand.rank.equals(Rank.FULL_HOUSE)).sorted(Day7::compareP2).toList();
