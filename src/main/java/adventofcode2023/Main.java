@@ -41,11 +41,8 @@ public class Main {
 //        System.out.println("Day6/Puzzle1: " + Day6.Puzzle1());
 //        System.out.println("Day6/Puzzle2: " + Day6.Puzzle2());
 //
-//        long startTimeD7P1 = System.currentTimeMillis();
+//
 //        System.out.println("Day7/Puzzle1: " + Day7.Puzzle1("Day7_1.txt"));
-//        long stopTimeD7P1 = System.currentTimeMillis();
-//        long elapsedTimeD7P1 = stopTimeD7P1 - startTimeD7P1;
-//        System.out.println(elapsedTimeD7P1 + "ms");
 //        System.out.println("Day7/Puzzle2: " + Day7.Puzzle2("Day7_1.txt"));
 //
 //        System.out.println("Day8/Puzzle1: " + Day8.Puzzle1("Day8_1-steps.txt", "Day8_1-nodes.txt"));
