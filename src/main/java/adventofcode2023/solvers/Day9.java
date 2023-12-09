@@ -19,14 +19,14 @@ public class Day9 {
 
             boolean allZeros = false;
             while (!allZeros) {
-                Integer target = tree.size() - 1;
+                int target = tree.size() - 1;
                 List<Integer> nextSet = new ArrayList<>();
                 for (int i = 1; i < tree.get(tree.size() - 1).size(); i++) {
                     nextSet.add(tree.get(target).get(i) - tree.get(target).get(i - 1));
                 }
                 tree.add(nextSet);
 
-                if (nextSet.stream().filter(i -> i != 0).count() == 0) {
+                if (nextSet.stream().noneMatch(i -> i != 0)) {
                     allZeros = true;
                 }
             }
@@ -39,7 +39,7 @@ public class Day9 {
             }
 
             return carryForward;
-        }).reduce(0, (a, b) -> a + b));
+        }).reduce(0, Integer::sum));
     }
 
     public static String Puzzle2(String input) {
@@ -52,14 +52,14 @@ public class Day9 {
 
             boolean allZeros = false;
             while (!allZeros) {
-                Integer target = tree.size() - 1;
+                int target = tree.size() - 1;
                 List<Integer> nextSet = new ArrayList<>();
                 for (int i = 1; i < tree.get(tree.size() - 1).size(); i++) {
                     nextSet.add(tree.get(target).get(i) - tree.get(target).get(i - 1));
                 }
                 tree.add(nextSet);
 
-                if (nextSet.stream().filter(i -> i != 0).count() == 0) {
+                if (nextSet.stream().noneMatch(i -> i != 0)) {
                     allZeros = true;
                 }
             }
@@ -72,7 +72,7 @@ public class Day9 {
             }
 
             return carryForward;
-        }).reduce(0, (a, b) -> a + b));
+        }).reduce(0, Integer::sum));
     }
 
 }
