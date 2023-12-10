@@ -1,5 +1,6 @@
 package adventofcode2023;
 
+import adventofcode2023.solvers.Day10;
 import adventofcode2023.solvers.Day9;
 
 public class Main {
@@ -50,5 +51,8 @@ public class Main {
 
         System.out.println("Day9/Puzzle1: " + Day9.Puzzle1("Day9_1.txt"));
         System.out.println("Day9/Puzzle2: " + Day9.Puzzle2("Day9_1.txt"));
+
+        System.out.println("Day10/Puzzle1: " + Day10.Puzzle1("Day10_1.txt"));
+        System.out.println("Day10/Puzzle2: " + Day10.Puzzle2("Day10_1.txt"));
     }
 }

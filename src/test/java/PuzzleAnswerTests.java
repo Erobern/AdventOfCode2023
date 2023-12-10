@@ -46,5 +46,8 @@ public class PuzzleAnswerTests {
 
         Assertions.assertEquals("1696140818", Day9.Puzzle1("Day9_1.txt"), "Day 9, Puzzle 1");
         Assertions.assertEquals("1152", Day9.Puzzle2("Day9_1.txt"), "Day 9, Puzzle 2");
+
+        Assertions.assertEquals("6968", Day10.Puzzle1("Day10_1.txt"), "Day 10, Puzzle 1");
+        Assertions.assertEquals("413", Day10.Puzzle2("Day10_1.txt"), "Day 10, Puzzle 2");
     }
 }
