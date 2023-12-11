@@ -129,6 +129,7 @@ public class Day10 {
             }
         }
 
+        //perform original calculation - close the loop
         traverseNode(nodes, sX, sY, 0);
         Node sNode = nodes[sX][sY];
 
@@ -174,6 +175,7 @@ public class Day10 {
         }
 
         // expand the node list (put a gap between each)
+        // adding resolution, so we can properly flood fill
         Node[][] expandedNodes = new Node[279][279];
 
         for (int i = 0; i < 279; i++) {
@@ -197,7 +199,7 @@ public class Day10 {
             }
         }
 
-        // add all nontraversed outer edge nodes
+        // add all nontraversed outer edge nodes to the original flood fill start point
         currentNodes = new ArrayList<>();
         for (int i = 0; i < 279; i++) {
             for (int j = 0; j < 279; j++) {
@@ -254,6 +256,7 @@ public class Day10 {
             }
         }
 
+        // count remaining non-traversed nodes
         int enclosedNodes = 0;
 
         for (int i = 0; i < 140; i++) {
