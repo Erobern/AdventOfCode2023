@@ -2,21 +2,13 @@ package adventofcode2023.solvers;
 
 import adventofcode2023.fileloaders.FileLoaders;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class Day10 {
-
-    private static final Map<Pipe, List<Direction>> pipeDirectionMap = new HashMap<>();
-
-    static {
-        pipeDirectionMap.put(Pipe.BAR, List.of(Direction.NORTH, Direction.SOUTH));
-        pipeDirectionMap.put(Pipe.DASH, List.of(Direction.EAST, Direction.WEST));
-        pipeDirectionMap.put(Pipe.L, List.of(Direction.NORTH, Direction.WEST));
-        pipeDirectionMap.put(Pipe.J, List.of(Direction.NORTH, Direction.WEST));
-        pipeDirectionMap.put(Pipe.SEVEN, List.of(Direction.SOUTH, Direction.WEST));
-        pipeDirectionMap.put(Pipe.F, List.of(Direction.SOUTH, Direction.EAST));
-    }
 
     public static String Puzzle1(String input) {
         List<String> lines = FileLoaders.loadInputIntoStringList(input);
