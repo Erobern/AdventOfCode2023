@@ -106,6 +106,9 @@ public class Day12 {
 
         lines.parallelStream().forEach(line -> {
             List<String> splitLines = Arrays.stream(line.split(" ")).toList();
+
+            System.out.println(splitLines.get(1) + ": starting...");
+
             List<Integer> ints = Arrays.stream((splitLines.get(1) + "," + splitLines.get(1) + "," +
                     splitLines.get(1) + "," + splitLines.get(1) + "," + splitLines.get(1)).split(",")).map(Integer::parseInt).toList();
             String regex = "^[UW]*";
@@ -116,8 +119,8 @@ public class Day12 {
             regex = regex.substring(0, regex.length() - 1) + "*$";
             Pattern pattern = Pattern.compile(regex);
 
-            long matchingRegex = matchRegex(splitLines.get(0) + splitLines.get(0) +
-                    splitLines.get(0) + splitLines.get(0) + splitLines.get(0), pattern);
+            long matchingRegex = matchRegex(splitLines.get(0) + "U" + splitLines.get(0) + "U" +
+                    splitLines.get(0) + "U" + splitLines.get(0) + "U" + splitLines.get(0), pattern);
 
             System.out.println(splitLines.get(1) + ": " + matchingRegex);
 
