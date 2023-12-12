@@ -50,8 +50,10 @@ public class PuzzleAnswerTests {
         Assertions.assertEquals("6968", Day10.Puzzle1("Day10_1.txt"), "Day 10, Puzzle 1");
         Assertions.assertEquals("413", Day10.Puzzle2("Day10_1.txt"), "Day 10, Puzzle 2");
 
-
         Assertions.assertEquals("9805264", Day11.Puzzle1("Day11_1.txt"), "Day 11, Puzzle 1");
         Assertions.assertEquals("779032247216", Day11.Puzzle2("Day11_1.txt"), "Day 11, Puzzle 2");
+
+        Assertions.assertEquals("7718", Day12.Puzzle1("Day12_1.txt"), "Day 12, Puzzle 1");
+        Assertions.assertEquals("779032247216", Day12.Puzzle2("Day12_1.txt"), "Day 12, Puzzle 2");
     }
 }
