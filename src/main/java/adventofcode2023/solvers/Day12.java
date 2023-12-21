@@ -100,7 +100,8 @@ public class Day12 {
 //    }
 
     public static String Puzzle2(String input) {
-        List<String> lines = FileLoaders.loadInputIntoStringList(input);
+        List<String> lines = FileLoaders.loadInputIntoStringList(input)
+                .stream().sorted((o1, o2) -> Math.toIntExact(Arrays.stream(o1.split("")).filter(o -> o.equals("U")).count() - Arrays.stream(o2.split("")).filter(o -> o.equals("U")).count())).toList();
 
         AtomicLong arrangementsSum = new AtomicLong();
 
