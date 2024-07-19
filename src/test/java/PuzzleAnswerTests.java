@@ -2,6 +2,8 @@ import adventofcode2023.solvers.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 public class PuzzleAnswerTests {
 
     @Test
@@ -64,5 +66,8 @@ public class PuzzleAnswerTests {
 
         Assertions.assertEquals("495972", Day15.Puzzle1("Day15_1.txt"), "Day 15, Puzzle 1");
         Assertions.assertEquals("245223", Day15.Puzzle2("Day15_1.txt"), "Day 15, Puzzle 2");
+
+        Assertions.assertEquals("7392", Day16.Puzzle1("Day16_1.txt", Optional.empty()), "Day 16, Puzzle 1");
+        Assertions.assertEquals("7665", Day16.Puzzle2("Day16_1.txt"), "Day 16, Puzzle 2");
     }
 }
