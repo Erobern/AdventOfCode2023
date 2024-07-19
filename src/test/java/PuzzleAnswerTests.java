@@ -57,9 +57,12 @@ public class PuzzleAnswerTests {
         Assertions.assertEquals("128741994134728", Day12.Puzzle2_Rewrite("Day12_1.txt"), "Day 12, Puzzle 2");
 
         Assertions.assertEquals("28651", Day13.Puzzle1("Day13_1.txt"), "Day 13, Puzzle 1");
-        Assertions.assertEquals("25450", Day13.Puzzle2("Day13_1.txt"), "Day 13, Puzzle 1");
+        Assertions.assertEquals("25450", Day13.Puzzle2("Day13_1.txt"), "Day 13, Puzzle 2");
 
         Assertions.assertEquals("113525", Day14.Puzzle1("Day14_1.txt"), "Day 14, Puzzle 1");
-        Assertions.assertEquals("101292", Day14.Puzzle2("Day14_1.txt"), "Day 14, Puzzle 1");
+        Assertions.assertEquals("101292", Day14.Puzzle2("Day14_1.txt"), "Day 14, Puzzle 2");
+
+        Assertions.assertEquals("495972", Day15.Puzzle1("Day15_1.txt"), "Day 15, Puzzle 1");
+        Assertions.assertEquals("245223", Day15.Puzzle2("Day15_1.txt"), "Day 15, Puzzle 2");
     }
 }
